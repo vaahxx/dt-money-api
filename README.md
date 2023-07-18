@@ -1,7 +1,7 @@
 # Functional requirements
 
 - [x] The user should be able to create a new transaction
-- [ ] The user should be able to see the balance
+- [x] The user should be able to see the balance
 - [x] The user should be able to see all the transactions
 - [x] The user should be able to see a specific transaction
 
