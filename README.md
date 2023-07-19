@@ -8,5 +8,5 @@
 # Business requirements
 
 - [x] The transaction can be of type income or expense
-- [ ] It must be possible to identify the user of the request
-- [ ] The user can only see the transactions that he created
+- [x] It must be possible to identify the user of the request
+- [x] The user can only see the transactions that he created
