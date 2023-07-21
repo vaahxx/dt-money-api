@@ -98,7 +98,7 @@ export async function transactionsRoutes(app: FastifyInstance) {
         })
         .returning('*')
 
-      return reply.status(201).send(transaction)
+      return reply.status(201).send({ transaction })
     } catch (err) {
       return reply.status(400).send(err)
     }
