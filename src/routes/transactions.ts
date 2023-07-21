@@ -4,14 +4,36 @@ import { knex } from '../database'
 import { FastifyInstance } from 'fastify'
 import { checkSessionIdExists } from '../middlewares/check-session-id-exists'
 
+interface IQuerystring {
+  description: string
+}
+
 export async function transactionsRoutes(app: FastifyInstance) {
-  app.get('/', { preHandler: [checkSessionIdExists] }, async (request) => {
+  app.get<{
+    Querystring: IQuerystring
+  }>('/', { preHandler: [checkSessionIdExists] }, async (request) => {
+    const { description } = request.query
     const { sessionId } = request.cookies
-    console.log(sessionId)
-    const transactions = await knex('transactions')
-      .where('session_id', sessionId)
-      .select('*')
-    return { transactions }
+
+    if (request.query) {
+      return searchTransactions()
+    }
+    return getAllTransactions()
+
+    async function getAllTransactions() {
+      const transactions = await knex('transactions')
+        .where('session_id', sessionId)
+        .select('*')
+      return { transactions }
+    }
+
+    async function searchTransactions() {
+      const transactions = await knex('transactions')
+        .where('session_id', sessionId)
+        .andWhereLike('description', `%${description}%`)
+        .select('*')
+      return { transactions }
+    }
   })
 
   app.get('/:id', { preHandler: [checkSessionIdExists] }, async (request) => {
@@ -33,7 +55,7 @@ export async function transactionsRoutes(app: FastifyInstance) {
   app.get(
     '/summary',
     { preHandler: [checkSessionIdExists] },
-    async (request, reply) => {
+    async (request) => {
       const { sessionId } = request.cookies
       const summary = await knex('transactions')
         .where('session_id', sessionId)
