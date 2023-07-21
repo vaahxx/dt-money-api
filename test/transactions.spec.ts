@@ -21,7 +21,7 @@ describe('Transactions routes', () => {
     await request(app.server)
       .post('/transactions')
       .send({
-        title: 'new transaction',
+        description: 'new transaction',
         amount: 100,
         category: 'outcome',
         type: 'outcome',
@@ -33,7 +33,7 @@ describe('Transactions routes', () => {
     await request(app.server)
       .post('/transactions')
       .send({
-        title: 'new transaction',
+        description: 'new transaction',
         amount: 100,
         type: 'deposit',
       })
@@ -44,7 +44,7 @@ describe('Transactions routes', () => {
     const createTransactionResponse = await request(app.server)
       .post('/transactions')
       .send({
-        title: 'new transaction',
+        description: 'new transaction',
         category: 'outcome',
         amount: 100,
         type: 'outcome',
@@ -60,7 +60,7 @@ describe('Transactions routes', () => {
     expect(listTransactionsResponse.body.transactions).toEqual([
       expect.objectContaining({
         amount: -100,
-        title: 'new transaction',
+        description: 'new transaction',
         category: 'outcomes',
       }),
     ])
@@ -70,7 +70,7 @@ describe('Transactions routes', () => {
     const createTransactionResponse = await request(app.server)
       .post('/transactions')
       .send({
-        title: 'new transaction',
+        description: 'new transaction',
         category: 'outcomes',
         amount: 100,
         type: 'outcome',
@@ -94,7 +94,7 @@ describe('Transactions routes', () => {
       expect.objectContaining({
         id: transactionId,
         amount: -100,
-        title: 'new transaction',
+        description: 'new transaction',
         category: 'outcomes',
       }),
     )
@@ -104,7 +104,7 @@ describe('Transactions routes', () => {
     const createTransactionResponse = await request(app.server)
       .post('/transactions')
       .send({
-        title: 'outcome transaction',
+        description: 'outcome transaction',
         category: 'outcomes',
         amount: 100,
         type: 'outcome',
@@ -116,7 +116,7 @@ describe('Transactions routes', () => {
       .post('/transactions')
       .set('Cookie', cookies)
       .send({
-        title: 'income transaction',
+        description: 'income transaction',
         category: 'incomes',
         amount: 500,
         type: 'income',

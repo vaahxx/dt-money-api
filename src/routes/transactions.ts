@@ -46,13 +46,13 @@ export async function transactionsRoutes(app: FastifyInstance) {
   app.post('/', async (request, reply) => {
     try {
       const createTransactionBodySchema = z.object({
-        title: z.string(),
+        description: z.string(),
         category: z.string(),
         amount: z.number(),
         type: z.enum(['income', 'outcome']),
       })
 
-      const { title, amount, type, category } =
+      const { description, amount, type, category } =
         createTransactionBodySchema.parse(request.body)
 
       let sessionId = request.cookies.sessionId
@@ -67,7 +67,7 @@ export async function transactionsRoutes(app: FastifyInstance) {
 
       await knex('transactions').insert({
         id: crypto.randomUUID(),
-        title,
+        description,
         category,
         amount: type === 'income' ? amount : amount * -1,
         session_id: sessionId,
