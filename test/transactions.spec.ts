@@ -23,8 +23,8 @@ describe('Transactions routes', () => {
       .send({
         title: 'new transaction',
         amount: 100,
-        category: 'expenses',
-        type: 'expense',
+        category: 'outcome',
+        type: 'outcome',
       })
       .expect(201)
   })
@@ -45,9 +45,9 @@ describe('Transactions routes', () => {
       .post('/transactions')
       .send({
         title: 'new transaction',
-        category: 'expenses',
+        category: 'outcome',
         amount: 100,
-        type: 'expense',
+        type: 'outcome',
       })
 
     const cookies = createTransactionResponse.get('Set-Cookie')
@@ -61,7 +61,7 @@ describe('Transactions routes', () => {
       expect.objectContaining({
         amount: -100,
         title: 'new transaction',
-        category: 'expenses',
+        category: 'outcomes',
       }),
     ])
   })
@@ -71,9 +71,9 @@ describe('Transactions routes', () => {
       .post('/transactions')
       .send({
         title: 'new transaction',
-        category: 'expenses',
+        category: 'outcomes',
         amount: 100,
-        type: 'expense',
+        type: 'outcome',
       })
 
     const cookies = createTransactionResponse.get('Set-Cookie')
@@ -95,7 +95,7 @@ describe('Transactions routes', () => {
         id: transactionId,
         amount: -100,
         title: 'new transaction',
-        category: 'expenses',
+        category: 'outcomes',
       }),
     )
   })
@@ -104,10 +104,10 @@ describe('Transactions routes', () => {
     const createTransactionResponse = await request(app.server)
       .post('/transactions')
       .send({
-        title: 'expense transaction',
-        category: 'expenses',
+        title: 'outcome transaction',
+        category: 'outcomes',
         amount: 100,
-        type: 'expense',
+        type: 'outcome',
       })
 
     const cookies = createTransactionResponse.get('Set-Cookie')

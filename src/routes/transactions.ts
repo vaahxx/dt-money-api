@@ -49,7 +49,7 @@ export async function transactionsRoutes(app: FastifyInstance) {
         title: z.string(),
         category: z.string(),
         amount: z.number(),
-        type: z.enum(['income', 'expense']),
+        type: z.enum(['income', 'outcome']),
       })
 
       const { title, amount, type, category } =
