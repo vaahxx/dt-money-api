@@ -23,6 +23,7 @@ describe('Transactions routes', () => {
       .send({
         title: 'new transaction',
         amount: 100,
+        category: 'expenses',
         type: 'expense',
       })
       .expect(201)
@@ -44,6 +45,7 @@ describe('Transactions routes', () => {
       .post('/transactions')
       .send({
         title: 'new transaction',
+        category: 'expenses',
         amount: 100,
         type: 'expense',
       })
@@ -56,7 +58,11 @@ describe('Transactions routes', () => {
       .expect(200)
 
     expect(listTransactionsResponse.body.transactions).toEqual([
-      expect.objectContaining({ amount: -100, title: 'new transaction' }),
+      expect.objectContaining({
+        amount: -100,
+        title: 'new transaction',
+        category: 'expenses',
+      }),
     ])
   })
 
@@ -65,6 +71,7 @@ describe('Transactions routes', () => {
       .post('/transactions')
       .send({
         title: 'new transaction',
+        category: 'expenses',
         amount: 100,
         type: 'expense',
       })
@@ -88,6 +95,7 @@ describe('Transactions routes', () => {
         id: transactionId,
         amount: -100,
         title: 'new transaction',
+        category: 'expenses',
       }),
     )
   })
@@ -97,6 +105,7 @@ describe('Transactions routes', () => {
       .post('/transactions')
       .send({
         title: 'expense transaction',
+        category: 'expenses',
         amount: 100,
         type: 'expense',
       })
@@ -108,6 +117,7 @@ describe('Transactions routes', () => {
       .set('Cookie', cookies)
       .send({
         title: 'income transaction',
+        category: 'incomes',
         amount: 500,
         type: 'income',
       })
