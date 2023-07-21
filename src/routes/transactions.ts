@@ -87,7 +87,7 @@ export async function transactionsRoutes(app: FastifyInstance) {
         })
       }
 
-      await knex('transactions').insert({
+      const transaction = await knex('transactions').insert({
         id: crypto.randomUUID(),
         description,
         category,
@@ -96,7 +96,7 @@ export async function transactionsRoutes(app: FastifyInstance) {
         session_id: sessionId,
       })
 
-      return reply.status(201).send()
+      return reply.status(201).send({ transaction })
     } catch (err) {
       return reply.status(400).send(err)
     }
