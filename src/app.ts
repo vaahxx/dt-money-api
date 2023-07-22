@@ -7,7 +7,14 @@ export const app = fastify()
 
 app.register(cookie)
 
-app.register(cors)
+app.register((fastify, options, done) => {
+  fastify.register(cors, {
+    origin: '*',
+    methods: ['POST', 'GET', 'PUT', 'DELETE'],
+  })
+
+  done()
+})
 
 app.register(transactionsRoutes, {
   prefix: 'transactions',
