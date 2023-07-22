@@ -5,8 +5,8 @@ export function checkSessionIdExists(
   reply: FastifyReply,
   done: () => void,
 ) {
-  // if (!request.cookies.sessionId) {
-  //   return reply.status(401).send({ error: 'Unauthorized' })
-  // }
+  if (!request.cookies.sessionId) {
+    return reply.status(401).send({ error: 'Unauthorized' })
+  }
   done()
 }
