@@ -8,9 +8,14 @@ export const app = fastify()
 app.register(cookie)
 
 app.register(cors, {
-  origin: true,
+  origin: 'http://localhost:5173',
   credentials: true,
 })
+
+// app.register(cors, {
+//   origin: true,
+//   credentials: true,
+// })
 
 app.register(transactionsRoutes, {
   prefix: 'transactions',
