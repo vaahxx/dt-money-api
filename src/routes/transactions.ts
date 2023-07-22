@@ -15,7 +15,7 @@ export async function transactionsRoutes(app: FastifyInstance) {
     const { description } = request.query
     const { sessionId } = request.cookies
 
-    if (request.query) {
+    if (description) {
       return searchTransactions()
     }
     return getAllTransactions()
