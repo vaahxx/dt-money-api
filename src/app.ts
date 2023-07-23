@@ -8,7 +8,7 @@ export const app = fastify()
 app.register(cookie)
 
 app.register(cors, {
-  origin: true,
+  origin: /\*/,
   credentials: true,
 })
 
