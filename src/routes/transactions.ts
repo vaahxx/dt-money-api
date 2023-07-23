@@ -83,7 +83,7 @@ export async function transactionsRoutes(app: FastifyInstance) {
         sessionId = crypto.randomUUID()
         reply.cookie('sessionId', sessionId, {
           path: '/',
-          domain: 'localhost',
+          domain: 'vercel.app',
           maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
         })
       }
