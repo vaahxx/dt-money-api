@@ -73,6 +73,61 @@ Response:
 }
 ```
 
+Optionally, this endpoint can receive a query param to search for a specific description between transactions.
+
+`GET https://dt-money-api.learntics.com/transactions?description=cake`
+
+Response:
+
+```json
+{
+    "transaction": [
+        {
+            "id": "ff1f445c-d09a-4efd-8967-4a285358557c",
+            "description": "Chocolate cake",
+            "amount": "230.00",
+            "created_at": "2023-07-23T17:16:34.177Z",
+            "session_id": "bd739bdc-430e-4cae-b8a2-1fc39fd2eac2",
+            "category": "food",
+            "type": "outcome"
+        }
+    ]
+}
+```
+
+## Retrieve transaction by id
+
+`GET https://dt-money-api.learntics.com/transactions/:id`
+
+Response:
+
+```json
+{
+    "transaction": {
+        "id": "e500d045-8a85-4f15-a147-baeb5a93b3d0",
+        "description": "Chocolate cake",
+        "amount": "-100.00",
+        "created_at": "2023-07-23T17:32:30.295Z",
+        "session_id": "bd739bdc-430e-4cae-b8a2-1fc39fd2eac2",
+        "category": "food",
+        "type": "outcome"
+    }
+}
+```
+
+## Retrieve balance (summary)
+
+`GET https://dt-money-api.learntics.com/transactions/summary`
+
+Response:
+
+```json
+{
+    "summary": {
+        "amount": "5420.00"
+    }
+}
+```
 
 # Functional requirements
 
